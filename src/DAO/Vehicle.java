@@ -47,4 +47,6 @@ public class Vehicle {
     public void setType(int type) {
         Type = type;
     }
+
+
 }
