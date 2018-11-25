@@ -7,9 +7,7 @@ import java.util.regex.Pattern;
 public class CheckPlate {
 
 
-    //String sPhoneNumber1 = "605-888-9999";
-    //String sPhoneNumber2 = "605-888-9991";
-    //String sPhoneNumber3 = "605-8838-9993";
+
 
     public int Pattern(String plate){
 
