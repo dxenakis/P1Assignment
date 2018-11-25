@@ -9,7 +9,7 @@ public class CheckPlate {
 
 
 
-    public int Pattern(String plate){
+    public void Pattern(String plate){
 
         Pattern pattern = Pattern.compile("[A-Z]{3}-\\d{4}");
         Matcher matcher = pattern.matcher(plate);
@@ -20,7 +20,7 @@ public class CheckPlate {
         {
             System.out.println("Plate Number must be in the form XXX-1234");
         }
-        return 5;
+
 
     }
 
