@@ -1,43 +1,50 @@
 package DAO; //That is the way to import classes from other Packages
 
-import java.util.Date;
+import java.time.LocalDate;
 
 public class Insurance {
 
-    private int Id;
-    private Date ExpireDate;
-    private Owner InsuranceOwner;
-    private Vehicle InsuranceVehicle;
+    private int id;
+    private Owner insuranceOwner;
+    private Vehicle insuranceVehicle;
+    private LocalDate expireDate;
+
+    public Insurance(int id, Owner insuranceOwner, Vehicle insuranceVehicle, LocalDate expireDate) {
+        this.id = id;
+        this.insuranceOwner = insuranceOwner;
+        this.insuranceVehicle = insuranceVehicle;
+        this.expireDate = expireDate;
+    }
 
     public int getId() {
-        return Id;
+        return id;
     }
 
     public void setId(int id) {
-        Id = id;
-    }
-
-    public Date getExpireDate() {
-        return ExpireDate;
-    }
-
-    public void setExpireDate(Date expireDate) {
-        ExpireDate = expireDate;
+        this.id = id;
     }
 
     public Owner getInsuranceOwner() {
-        return InsuranceOwner;
+        return insuranceOwner;
     }
 
     public void setInsuranceOwner(Owner insuranceOwner) {
-        InsuranceOwner = insuranceOwner;
+        this.insuranceOwner = insuranceOwner;
     }
 
     public Vehicle getInsuranceVehicle() {
-        return InsuranceVehicle;
+        return insuranceVehicle;
     }
 
     public void setInsuranceVehicle(Vehicle insuranceVehicle) {
-        InsuranceVehicle = insuranceVehicle;
+        this.insuranceVehicle = insuranceVehicle;
+    }
+
+    public LocalDate getExpireDate() {
+        return expireDate;
+    }
+
+    public void setExpireDate(LocalDate expireDate) {
+        this.expireDate = expireDate;
     }
 }
