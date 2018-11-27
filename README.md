@@ -4,6 +4,7 @@ Partially done:
 
 -F1: (Vehicle Insurance Status – pattern/format validation for plate number) <br />
 -F3: (Sorting of Vehicles) <br />
+-DB Schema
 
 NOT DONE:
 
