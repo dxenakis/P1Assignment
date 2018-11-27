@@ -10,7 +10,7 @@ NOT DONE:
 
 Eleutheria  -F2: (Vehicles' insurance that are about to expire) <br />
 Pending     -F4: (Fine calculation per owner) <br />
-Dimtris     -Database & queries. Converting data from db to java objects (Vehicle, Owner and Insurance) <br />
+Dimitris     -Database & queries. Converting data from db to java objects (Vehicle, Owner and Insurance) <br />
 Argyros     -Import/Export from file (CSV) <br />
 Giorgos     -Menu <br />
 
