@@ -4,9 +4,9 @@ import DAO.Insurance;
 import DAO.Owner;
 import DAO.Vehicle;
 
-import java.io.File;
-import java.io.FileNotFoundException;
+import java.io.*;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.Scanner;
 
 public class CsvFileManager {
@@ -17,10 +17,10 @@ public class CsvFileManager {
 
     public CsvFileManager() {
         container = new Container();
-        filePath = new File("Files/input.csv");
     }
 
     public void importDataFromFile() {
+        filePath = new File("Files/input.csv");
         try {
             scanner = new Scanner(filePath);
             container = new Container();
@@ -46,10 +46,41 @@ public class CsvFileManager {
             }
         } catch (FileNotFoundException e) {
             System.err.println("Can't parse file: " + e);
+            scanner.close();
         }
+        scanner.close();
 
         container.printInsuranceList();
         container.printVehicleOwnerMap();
+    }
 
+    public void exportDataToFile(String data) {
+        filePath = new File("Files/output.csv");
+
+        try {
+            FileWriter fileWriter = new FileWriter(filePath, true);
+            PrintWriter printWriter = new PrintWriter(fileWriter);
+            printWriter.println(data);
+            printWriter.flush();
+            printWriter.close();
+        } catch (FileNotFoundException e) {
+            System.err.println("Can't write to file: " + e);
+        } catch (IOException e) {
+            System.err.println("Can't write to file: " + e);
+        }
+    }
+
+    public void addTimeStampToExportFile() {
+        filePath = new File("Files/output.csv");
+        FileWriter fileWriter;
+        try {
+            fileWriter = new FileWriter(filePath, true);
+            PrintWriter printWriter = new PrintWriter(fileWriter);
+            printWriter.println(LocalDateTime.now().withSecond(0).withNano(0));
+            printWriter.flush();
+            printWriter.close();
+        } catch (IOException e) {
+            System.err.println("Can't write to file: " + e);
+        }
     }
 }
