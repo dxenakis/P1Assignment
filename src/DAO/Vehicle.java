@@ -1,6 +1,7 @@
 package DAO;
 
 public class Vehicle implements Comparable {
+
     private String ownerAmka;
     private String plateNumber;
 
@@ -26,7 +27,12 @@ public class Vehicle implements Comparable {
     }
 
     @Override
+    public String toString() {
+        return "Plate Number: " + plateNumber + " Owner Amka: " + ownerAmka;
+    }
+
+    @Override
     public int compareTo(Object o) {
-        return getPlateNumber().toUpperCase().compareTo(((Vehicle)o).getPlateNumber().toUpperCase());
+        return getPlateNumber().toUpperCase().compareTo(((Vehicle) o).getPlateNumber().toUpperCase());
     }
 }

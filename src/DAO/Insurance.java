@@ -47,4 +47,11 @@ public class Insurance {
     public void setExpireDate(LocalDate expireDate) {
         this.expireDate = expireDate;
     }
+
+    @Override
+    public String toString() {
+        return "Owner of the specific Insurance: " + insuranceOwner.getFirstName() + " " + insuranceOwner.getLastName()
+                + " AMKA: " + insuranceOwner.getAmka() + ". Vehicles' Plate Number: " + insuranceVehicle.getPlateNumber()
+                + ". Insurance Expiration Date: " + expireDate;
+    }
 }
