@@ -46,7 +46,6 @@ public class CsvFileManager {
             }
         } catch (FileNotFoundException e) {
             System.err.println("Can't parse file: " + e);
-            scanner.close();
         }
         scanner.close();
 
