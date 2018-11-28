@@ -21,7 +21,7 @@ public class Jdbc {
     }
 
     public static Jdbc getInstance() {
-        if(instance == null) {
+        if (instance == null) {
             instance = new Jdbc();
         }
         return instance;
