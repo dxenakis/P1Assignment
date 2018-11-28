@@ -1,11 +1,5 @@
 package IO;
 
-<<<<<<< HEAD
-
-public class CsvFileManager {
-
-}
-=======
 import DAO.Insurance;
 import DAO.Owner;
 import DAO.Vehicle;
@@ -89,4 +83,3 @@ public class CsvFileManager {
         }
     }
 }
->>>>>>> 6fc44df2715bad0290cf038d31e74a3e30ab619e
