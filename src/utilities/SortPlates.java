@@ -1,4 +1,4 @@
-package UTILITIES;
+package utilities;
 
 public class SortPlates {
 }

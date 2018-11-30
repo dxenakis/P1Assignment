@@ -1,8 +1,8 @@
-package IO;
+package io;
 
-import DAO.Insurance;
-import DAO.Owner;
-import DAO.Vehicle;
+import dao.Insurance;
+import dao.Owner;
+import dao.Vehicle;
 
 import java.util.ArrayList;
 import java.util.HashMap;

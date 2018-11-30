@@ -1,4 +1,4 @@
-package DAO;
+package dao;
 
 public class Vehicle implements Comparable {
 
@@ -33,6 +33,9 @@ public class Vehicle implements Comparable {
 
     @Override
     public int compareTo(Object o) {
-        return getPlateNumber().toUpperCase().compareTo(((Vehicle) o).getPlateNumber().toUpperCase());
+        if (o instanceof Vehicle && ((Vehicle) o).plateNumber.length() > 0) {
+            return plateNumber.toUpperCase().compareTo(((Vehicle) o).plateNumber.toUpperCase());
+        }
+        return 0;
     }
 }

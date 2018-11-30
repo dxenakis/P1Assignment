@@ -1,7 +1,7 @@
-package IO;
+package io;
 
-import DAO.Insurance;
-import DAO.Owner;
+import dao.Insurance;
+import dao.Owner;
 
 import java.sql.*;
 import java.util.ArrayList;

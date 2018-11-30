@@ -1,4 +1,4 @@
-package DAO; //That is the way to import classes from other Packages
+package dao; //That is the way to import classes from other Packages
 
 import java.time.LocalDate;
 
