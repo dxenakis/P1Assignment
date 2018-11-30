@@ -1,6 +1,7 @@
 package dao; //That is the way to import classes from other Packages
 
 import java.time.LocalDate;
+import java.time.temporal.ChronoUnit;
 
 public class Insurance {
 
@@ -53,5 +54,19 @@ public class Insurance {
         return "Owner of the specific Insurance: " + insuranceOwner.getFirstName() + " " + insuranceOwner.getLastName()
                 + " AMKA: " + insuranceOwner.getAmka() + ". Vehicles' Plate Number: " + insuranceVehicle.getPlateNumber()
                 + ". Insurance Expiration Date: " + expireDate;
+    }
+
+    public long remainingDaysOfInsurance() {
+        LocalDate dateNow = LocalDate.now();
+        long remainingDays = ChronoUnit.DAYS.between(dateNow, expireDate);
+        return remainingDays;
+    }
+
+    public boolean isExpiring(long days) {
+        long remainingDays = remainingDaysOfInsurance();
+        if(remainingDays > 0 && remainingDays <= days) {
+            return true;
+        }
+        return false;
     }
 }

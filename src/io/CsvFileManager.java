@@ -6,6 +6,7 @@ import dao.Vehicle;
 
 import java.io.*;
 import java.time.LocalDate;
+import java.util.List;
 import java.util.Scanner;
 
 public class CsvFileManager {
@@ -34,7 +35,6 @@ public class CsvFileManager {
                     case "INSURANCE":
                         Owner owner = container.getOwnerByAmka(splitLine[2]);
                         Vehicle vehicle = container.getVehicleByPlateNumber(splitLine[3]);
-                        System.out.println(vehicle);
                         if (owner != null && vehicle != null) {
                             Container.getInsuranceList().add(new Insurance(Integer.parseInt(splitLine[1]), owner, vehicle, LocalDate.parse(splitLine[4])));
                         }
@@ -51,6 +51,38 @@ public class CsvFileManager {
             printWriter.println(data);
         } catch (IOException e) {
             System.err.println("Can't write to file " + e);
+        }
+    }
+
+    public void writeExpiringInsuranceVehiclesToFile(long days, List<Insurance> insuranceList) {
+        try (FileWriter fileWriter = new FileWriter(outputFilePath, true);
+             PrintWriter printWriter = new PrintWriter(fileWriter)) {
+            printWriter.println("---------------------------------------------------------------------------");
+            printWriter.println("Vehicles that their insurance IS GOING TO EXPIRE within " + days + " days:");
+            printWriter.println("---------------------------------------------------------------------------");
+            long remainingDays;
+            for (Insurance insurance : insuranceList) {
+                if (insurance.isExpiring(days)) {
+                    remainingDays = insurance.remainingDaysOfInsurance();
+                    printWriter.println(insurance.getInsuranceVehicle() + "(EXPIRES IN : " + remainingDays + " DAYS)");
+                }
+            }
+        } catch (IOException e) {
+            System.err.println("Can't access file : " + e);
+        }
+    }
+
+    public void writeUninsuredVehiclesToFile(List<Vehicle> uninsuredVehicles) {
+        try (FileWriter fileWriter = new FileWriter(outputFilePath, true);
+             PrintWriter printWriter = new PrintWriter(fileWriter)) {
+            printWriter.println("---------------------------------------------------------------------------");
+            printWriter.println("Vehicles that their insurance HAS EXPIRED");
+            printWriter.println("---------------------------------------------------------------------------");
+            for (Vehicle vehicle : uninsuredVehicles) {
+                printWriter.println(vehicle);
+            }
+        } catch (IOException e) {
+            System.err.println("Can't access file : " + e);
         }
     }
 }
