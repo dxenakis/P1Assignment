@@ -2,8 +2,10 @@ package io;
 
 import dao.Insurance;
 import dao.Owner;
+import dao.Vehicle;
 
 import java.sql.*;
+import java.time.LocalDate;
 import java.util.ArrayList;
 
 public class Jdbc {
@@ -23,24 +25,25 @@ public class Jdbc {
 
 
     public ArrayList<Insurance> GetInsurances() throws SQLException {
+        ArrayList<Insurance> insurances = new ArrayList<>();
         Connection connection = GetConnection();
         Statement stmt = null;
         try {
             stmt = connection.createStatement();
-            String query = "SELECT insuranceID, ownerAMKA, plateNumber, expirationDate" +
-                    " FROM db.insurances";
+            String query = "SELECT insuranceID,b.firstName,b.lastName, a.ownerAMKA, a.plateNumber, expirationDate\n" +
+                    "FROM db.insurances A left join Owners B on A.ownerAMKA=B.AMKA \n" +
+                    "left join vehicles c on a.ownerAMKA = C.ownerAMKA";
 
 
             ResultSet rs = stmt.executeQuery(query);
             while (rs.next()) {
-                Integer insuranceID = rs.getInt("insuranceID");
-                String OnwerAMKA = rs.getString("ownerAMKA");
-                String PlateNumber = rs.getString("plateNumber");
-                Date expirationDate = rs.getDate("expirationDate");
-
-                System.out.println("\t" + insuranceID +
-                        "\t" + PlateNumber + "\t" + OnwerAMKA +
-                        "\t" + expirationDate);
+                Owner owner = new Owner(rs.getString("ownerAMKA"),
+                        rs.getString("firstName"),rs.getString("lastName"));
+                Vehicle vehicle = new Vehicle(rs.getString("ownerAMKA"),rs.getString("plateNumber"));
+                String Date = rs.getString("expirationDate");
+                LocalDate date = LocalDate.parse(Date);
+                Insurance insurance = new Insurance(rs.getInt("insuranceID"),owner,vehicle, date);
+                insurances.add(insurance);
             }
 
         }catch (SQLException e){
@@ -49,10 +52,11 @@ public class Jdbc {
             stmt.close();
         }
 
-        return null;
+        return insurances;
     }
 
     public ArrayList<Owner> GetOnwers() throws SQLException {
+        ArrayList<Owner> owners = new ArrayList<>();
         Connection connection = GetConnection();
         Statement stmt = null;
         try {
@@ -63,12 +67,10 @@ public class Jdbc {
 
             ResultSet rs = stmt.executeQuery(query);
             while (rs.next()) {
-                String AMKA = rs.getString("AMKA");
-                String firstName = rs.getString("firstName");
-                String lastName = rs.getString("lastName");
-
-                System.out.println("\t" + AMKA +
-                        "\t" + firstName + "\t" + lastName);
+                Owner owner = new Owner(rs.getString("AMKA"),
+                        rs.getString("firstName"),
+                        rs.getString("lastName"));
+                owners.add(owner);
             }
 
         }catch (SQLException e){
@@ -77,10 +79,12 @@ public class Jdbc {
             stmt.close();
         }
 
-        return null;
+        return owners;
     }
 
-    public ArrayList<Owner> GetVehicles() throws SQLException {
+    public ArrayList<Vehicle> GetVehicles() throws SQLException {
+        ArrayList<Vehicle> vehicles = new ArrayList<Vehicle>();
+     //   Vehicle vehicle = null;
         Connection connection = GetConnection();
         Statement stmt = null;
         try {
@@ -91,11 +95,9 @@ public class Jdbc {
 
             ResultSet rs = stmt.executeQuery(query);
             while (rs.next()) {
-                String plateNumber = rs.getString("plateNumber");
-                String ownerAMKA = rs.getString("ownerAMKA");
-
-                System.out.println("\t" + plateNumber +
-                        "\t" + ownerAMKA);
+                Vehicle vehicle = new Vehicle(rs.getString("plateNumber"),
+                        rs.getString("ownerAMKA"));
+                vehicles.add(vehicle);
             }
 
         }catch (SQLException e){
@@ -104,7 +106,7 @@ public class Jdbc {
             stmt.close();
         }
 
-        return null;
+        return vehicles;
     }
 
 
