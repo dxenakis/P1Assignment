@@ -5,11 +5,14 @@ public class Owner {
     private String amka;
     private String firstName;
     private String lastName;
+    private double fine;
+
 
     public Owner(String amka, String firstName, String lastName) {
         this.amka = amka;
         this.firstName = firstName;
         this.lastName = lastName;
+        fine = 0;
     }
 
     public String getAmka() {
@@ -36,9 +39,17 @@ public class Owner {
         this.lastName = lastName;
     }
 
+    public double getFine() {
+        return fine;
+    }
+
+    public void setFine(double fine) {
+        this.fine = fine;
+    }
+
     @Override
     public String toString() {
-        return "Owner First Name: " + firstName + " Owner Last Name: " + lastName + " AMKA: " + amka;
+        return "Owner First Name: " + firstName + " Owner Last Name: " + lastName + " AMKA: " + amka + " Fine: " + fine;
     }
 }
 

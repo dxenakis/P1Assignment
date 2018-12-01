@@ -103,6 +103,14 @@ public class Container {
         Collections.sort(uninsuredVehicleList);
     }
 
+    public void calculateTotalFine(double flatFine) {
+        for (Vehicle vehicle : uninsuredVehicleList) {
+            Owner owner = getOwnerByAmka(vehicle.getOwnerAmka());
+            double currentFine = owner.getFine();
+            owner.setFine(currentFine + flatFine);
+        }
+    }
+
     public void printExpiringInsuranceVehicles(long days) {
         System.out.println("Vehicles that their insurance is going to expire within " + days + " days:");
         System.out.println("---------------------------------------------------------------------------");
