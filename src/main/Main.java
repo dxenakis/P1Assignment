@@ -15,13 +15,13 @@ public class Main {
 
     public static void main(String[] args) throws FileNotFoundException, SQLException {
         CsvFileManager fileManager = new CsvFileManager();
-        Container container = new Container();
+        Container container = Container.getInstance();
         fileManager.importDataFromFile();
         //container.printExpiringInsuranceVehicles(3000);
         container.createUninsuredVehicleList();
         container.printUninsuredVehicleList();
-        fileManager.writeExpiringInsuranceVehiclesToFile(3000, Container.getInsuranceList());
-        fileManager.writeUninsuredVehiclesToFile(Container.getUninsuredVehicleList());
+        fileManager.writeExpiringInsuranceVehiclesToFile(3000, container.getInsuranceList());
+        fileManager.writeUninsuredVehiclesToFile(container.getUninsuredVehicleList());
         ArrayList<Vehicle> vehicles = new Jdbc().GetVehicles();
         ArrayList<Owner> owners = new Jdbc().GetOnwers();
         ArrayList<Insurance> insurances = new Jdbc().GetInsurances();

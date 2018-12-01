@@ -12,31 +12,40 @@ import java.util.List;
 
 public class Container {
 
-    private static List<Vehicle> vehicleList;
-    private static List<Owner> ownerList;
-    private static List<Insurance> insuranceList;
-    private static List<Vehicle> uninsuredVehicleList;
+    private List<Vehicle> vehicleList;
+    private List<Owner> ownerList;
+    private List<Insurance> insuranceList;
+    private List<Vehicle> uninsuredVehicleList;
+    private static Container instance;
 
-    public Container() {
+    private Container() {
         vehicleList = new ArrayList<>();
         ownerList = new ArrayList<>();
         insuranceList = new ArrayList<>();
         uninsuredVehicleList = new ArrayList<>();
     }
 
-    public static List<Insurance> getInsuranceList() {
+    public static Container getInstance() {
+        if(instance == null)
+        {
+            instance = new Container();
+        }
+        return instance;
+    }
+
+    public List<Insurance> getInsuranceList() {
         return insuranceList;
     }
 
-    public static List<Vehicle> getVehicleList() {
+    public List<Vehicle> getVehicleList() {
         return vehicleList;
     }
 
-    public static List<Owner> getOwnerList() {
+    public List<Owner> getOwnerList() {
         return ownerList;
     }
 
-    public static List<Vehicle> getUninsuredVehicleList() {
+    public List<Vehicle> getUninsuredVehicleList() {
         return uninsuredVehicleList;
     }
 
